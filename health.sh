@@ -3,11 +3,15 @@ set -euo pipefail
 
 main() {
     
-    local host="${1:-}"
-
-    if [[ -n "$host" ]]; then
-        ssh "$host" 'bash -s' < "$0"
-        return
+    if (( $# > 0 )); then
+        
+        for h in "$@"; do
+            echo "### $h ###"
+        if ! ssh -o BatchMode=yes -o ConnectTimeout=5 "$h" 'bash -s' < "$0"; then
+            echo "UNREACHABLE: $h"
+        fi
+        done
+            return
     fi
 
 echo "=== $(hostname) ==="
