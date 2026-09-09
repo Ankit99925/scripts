@@ -8,15 +8,20 @@ check(){
         echo "UP $host:$port"
     else
         echo "DOWN $host:$port"
+        return 1
     fi
 }
 
 main(){
+    local failed=0
     while read -r host port; do
         [[ -z "$host" ]] && continue
         [[ "$host" == \#* ]] && continue
-        check "$host" "$port"
+        if ! check "$host" "$port"; then
+            failed=1
+        fi
     done < "$script_dir/hosts.txt.example"
+    return "$failed"
 }
 
 main "$@"
