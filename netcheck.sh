@@ -13,8 +13,10 @@ check(){
 
 main(){
     while read -r host port; do
+        [[ -z "$host" ]] && continue
+        [[ "$host" == \#* ]] && continue
         check "$host" "$port"
-    done < "$script_dir/hosts.txt"
+    done < "$script_dir/hosts.txt.example"
 }
 
 main "$@"
