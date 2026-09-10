@@ -1,0 +1,7 @@
+[Unit]
+Description=Health check for remote hosts
+
+[Service]
+Type=oneshot
+# Add hostnames here, space-separated. Must be in ~/.ssh/config with key auth.
+ExecStart=%h/bin/health

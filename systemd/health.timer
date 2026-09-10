@@ -1,0 +1,16 @@
+[Unit]
+Description=Run health check daily
+
+[Timer]
+# Daily at 06:00. Format: DayOfWeek Year-Month-Day Hour:Minute:Second
+# Examples: hourly | daily | Mon *-*-* 09:00:00 | *-*-01 00:00:00 (monthly)
+OnCalendar=*-*-* 06:00:00
+
+# Run on next boot if the machine was off when this was due
+Persistent=true
+
+# Spread the start time up to 5 min to avoid thundering herd
+# RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

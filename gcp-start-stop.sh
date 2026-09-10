@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-INSTANCE="${INSTANCE:-appurihako-v2}"
-ZONE="${ZONE:-us-west1-b}"
+INSTANCE="${INSTANCE:?set INSTANCE to the target instance name}"
+ZONE="${ZONE:?set ZONE, e.g. us-west1-b}"
 
 action=${1:-status}
 
