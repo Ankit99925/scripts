@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-script_dir="$(cd "$(dirname "$0")" && pwd)"
+script_dir="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 
 usage(){
     echo "Usage: $(basename "$0") [-f FILE] [-t SECONDS] [-q]" >&2
